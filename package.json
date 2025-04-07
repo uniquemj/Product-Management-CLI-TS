@@ -1,0 +1,22 @@
+{
+  "name": "product-management-cli-ts",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc -w",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "@types/node": "^22.14.0",
+    "nanoid": "^5.1.5",
+    "ts-node": "^10.9.2"
+  }
+}
