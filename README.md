@@ -44,6 +44,11 @@ node dist/index.js product update <productId> --inventory=10
 node dist/index.js product delete <productId>
 ```
 
+- **Remove Category from product**: It will remove category detail from product.
+```bash
+node dist/index.js product remove-category <productId> --categoryId=<categoryId>
+```
+
 ### Cart
 - **Add product to cart**: It takes 3 additional values i.e. product Id and user Id and quantity.
 
@@ -74,4 +79,18 @@ node dist/index.js order create --userId=<userId>
 - **List orders for a user**: This will list order detail of a user.
 ```bash
 node dist/index.js order list --userId=<userId>
+```
+
+### Category
+- **Add Category**: This will add category in category.json file.
+```bash
+node dist/index.js category add --category=<categoryname>
+```
+- **Get all Category**: This get category list.
+```bash
+node dist/index.js category list
+```
+- **Remove Category**: Remove Category.
+```bash
+node index.js category remove <categoryId>
 ```
