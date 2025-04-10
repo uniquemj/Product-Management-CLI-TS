@@ -1,1 +1,23 @@
-[{"p_id":"6114","name":"Water bottle","price":100,"description":"","category":"","inventory":10},{"p_id":"8068","name":"Laptop","price":100000,"description":"","category":"","inventory":-104}]
+[
+    {
+        "p_id": "0919",
+        "name": "Laptop",
+        "price": 100000,
+        "description": "",
+        "category": [
+            {
+                "category_id": "8452",
+                "title": "gadget"
+            }
+        ],
+        "inventory": 0
+    },
+    {
+        "p_id": "6191",
+        "name": "Water Bottle",
+        "price": 199,
+        "description": "",
+        "category": [],
+        "inventory": 0
+    }
+]
