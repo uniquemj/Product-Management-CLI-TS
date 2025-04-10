@@ -1,46 +1,49 @@
-import ProductRepository from "../repository/product.repository.js"
-import CartRepository from "../repository/cart.repository.js"
-import { ICartItem } from "../types/cart.type.js"
+import {ProductRepository} from "../repository/product.repository.js"
+import {CartRepository} from "../repository/cart.repository.js"
+import { ICartItem, ICart } from "../types/cart.type.js"
 import { IHash } from "../types/hash.type.js"
 
-const addToCart = async (product_id: string, quantity: number, userId: string) =>{
+
+export class CartServices{
+    private readonly productRepository: ProductRepository
+    private readonly cartRepository: CartRepository
+
+    constructor(){
+        this.productRepository = new ProductRepository()
+        this.cartRepository = new CartRepository()
+    }
+
+    addToCart = async (product_id: string, quantity: number, userId: string): Promise<string> =>{
+        
+        if(!quantity){
+            return "Quantity is required"
+        }
+        const product = await this.productRepository.findById(product_id)
+        if(!product){
+            return "Product with Id doesn't exist."
+        }
+        
+        const result = await this.cartRepository.add(product, quantity, userId)
+        return result
+    }
     
-    if(!quantity){
-        return "Quantity is required"
+    viewCart = async(userId: string): Promise<string | [] | ICart[]> =>{
+        return await this.cartRepository.getAllCart(userId)
     }
-    const product = await ProductRepository.findById(product_id)
-    if(!product){
-        return "Product with Id doesn't exist."
+    
+    removeCartItem = async(product_id: string, userId:string): Promise<string> =>{
+        const cart_Items = await this.cartRepository.getAllCart(userId) as unknown as ICart[] 
+        const cart_Item = cart_Items[0].items.find((t:ICartItem)=>t.product.p_id === product_id) as ICartItem
+
+        if(!cart_Item){
+            return 'Product with Id not found.'
+        }
+        
+        const cartItem = await this.cartRepository.remove(cart_Item, userId)
+        return cartItem
     }
-
-    const result = await CartRepository.add(product, quantity, userId)
-    return result
-}
-
-const viewCart = async(userId: string) =>{
-    return await CartRepository.getAllCart(userId)
-}
-
-const removeCartItem = async(product_id: string, userId:string) =>{
-    const cart_Items = await CartRepository.getAllCart(userId)
-    const cart_Item = cart_Items[0].items.find((t:ICartItem)=>t.product.p_id === product_id)
-    if(cart_Item.length == 0){
-        return 'Product with Id not found.'
+    
+    cartTotal = async(userId:string): Promise<number> =>{
+        return await this.cartRepository.total(userId)
     }
-
-    const cartItem = await CartRepository.remove(cart_Item, userId)
-    return cartItem
 }
-
-const cartTotal = async(userId:string) =>{
-    return await CartRepository.total(userId)
-}
-
-const CartServices = {
-    addToCart,
-    viewCart,
-    removeCartItem,
-    cartTotal
-}
-
-export default CartServices

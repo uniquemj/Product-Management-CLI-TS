@@ -11,6 +11,8 @@ const HelpRoute = () =>{
      \t\tnode index.js product update <productId> --name="val" --price="val"\n   
      \t- Delete a Product:
      \t\tnode index.js product delete <productId>\n 
+     \t- Remove Category form Product:
+     \t\t node index.js product remove-category <productId> --categoryId=<categoryId>
      ----------------------------------------------
      2. Cart:\n
      \t- Add product to cart:
@@ -29,6 +31,14 @@ const HelpRoute = () =>{
      \t\tnode index.js order list --userId=<userId>\n
      \t- Change Status of Order:
      \t\tnode index.js order status <order_id> --status=<status> --userId=<userId>\n
+     ------------------------------------------------
+     4. Category:\n
+     \t- Add Category:
+     \t\tnode index.js category add --category=<categoryname>\n
+     \t- Get all Category:
+     \t\t node index.js category list\n
+    \t- Remove Category:
+    \t\t node index.js category remove <categoryId>\n
     `)
 }
 

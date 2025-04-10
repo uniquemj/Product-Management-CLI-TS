@@ -1,31 +1,33 @@
-import OrderRepository from "../repository/order.repository.js";
+import {OrderRepository} from "../repository/order.repository.js";
+import { IOrder } from "../types/order.type.js";
 
-const createOrder = async(user_id: string) =>{
-    const user_order = await OrderRepository.getOrderList(user_id)
-    if(user_order.length == 0){
-        return "Order with user exist."
+export class OrderServices{
+    private readonly orderRepository: OrderRepository
+
+    constructor(){
+        this.orderRepository = new OrderRepository()
     }
-    return await OrderRepository.createOrder(user_id)
-}
 
-const getOrderList = async(user_id:string) =>{
-    return await OrderRepository.getOrderList(user_id)
-}
-
-const updateStatus = async(orderId:string, userId:string, status:string) =>{
-    const user_order = await OrderRepository.getOrderList(userId)
+    createOrder = async(user_id: string) =>{
+        const user_order = await this.orderRepository.getOrderList(user_id)
+        if(!user_order){
+            return "Order with user exist."
+        }
+        return await this.orderRepository.createOrder(user_id)
+    }
     
-    if(user_order.o_id !== orderId){
-        return "Order with Order Id not found."
+    getOrderList = async(user_id:string) =>{
+        return await this.orderRepository.getOrderList(user_id)
     }
-
-    return await OrderRepository.updateStatus(orderId, userId, status)
+    
+    updateStatus = async(orderId:string, userId:string, status:string) =>{
+        const user_order = await this.orderRepository.getOrderList(userId) as IOrder
+        
+        if(user_order.o_id !== orderId){
+            return "Order with Order Id not found."
+        }
+        
+        return await this.orderRepository.updateStatus(orderId, userId, status)
+    }
+    
 }
-
-const OrderServices = {
-    createOrder, 
-    getOrderList, 
-    updateStatus
-}
-
-export default OrderServices

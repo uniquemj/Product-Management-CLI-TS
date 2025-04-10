@@ -5,7 +5,7 @@ import fs from 'fs/promises'
 
 export const parseArgs = (argv: any):IHash =>{
     return argv.reduce((hash: IHash, entry:any)=>{
-        const [option, value] = entry.split("=");
+        const [option, value = true] = entry.split("=");
         const key: string = option.startsWith('--') ? option.slice(2): '_';
 
         if(key == '_'){
