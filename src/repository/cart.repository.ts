@@ -1,11 +1,15 @@
 import path from 'path'
-import { getRandomId, readFileHelper, writeFileHelper } from '../helper/utils.js'
+import { HelperUtils} from '../helper/utils.js'
 import { productStorage }from './product.repository.js'
 import {ProductRepository} from './product.repository.js'
 import { ICart, ICartItem } from '../types/cart.type.js'
 import { IProduct } from '../types/product.type.js'
 
 export const cartStorage = path.join(process.cwd(), 'data', 'carts.json')
+
+const readFileHelper = HelperUtils.readFileHelper
+const writeFileHelper = HelperUtils.writeFileHelper
+const getRandomId =HelperUtils.getRandomId
 
 export class CartRepository{
     private readonly productRepository: ProductRepository

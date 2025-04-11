@@ -1,9 +1,12 @@
 import {ProductRepository} from "../repository/product.repository";
-import { getRandomId } from "../helper/utils";
+import { HelperUtils} from "../helper/utils";
 import { IHash } from "../types/hash.type";
 import { IProduct } from "../types/product.type";
 import { CategoryRepository } from "../repository/category.repository";
 import { ICategory } from "../types/category.type";
+
+
+const getRandomId =HelperUtils.getRandomId
 
 export class ProductServices{
     private readonly productRepository: ProductRepository

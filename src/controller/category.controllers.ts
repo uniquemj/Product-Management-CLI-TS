@@ -19,8 +19,8 @@ export class CategoryController{
 
     addCategory = async (args: IHash) =>{
         try{
-            const {category} = args
-            const result = await this.categoryServices.addCategory(category as string)
+            const category = args['category'] as string
+            const result = await this.categoryServices.addCategory(category)
             console.log(result)
         }catch(e:any){
             console.log(e.message)

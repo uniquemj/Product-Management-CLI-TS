@@ -1,10 +1,14 @@
 import path from 'path'
-import { readFileHelper, writeFileHelper } from '../helper/utils'
+import { HelperUtils} from '../helper/utils'
 import { IProduct } from '../types/product.type'
 import { IHash } from '../types/hash.type'
 import { CategoryRepository } from './category.repository'
 
 export const productStorage = path.join(process.cwd(), 'data', 'products.json')
+
+const readFileHelper = HelperUtils.readFileHelper
+const writeFileHelper = HelperUtils.writeFileHelper
+const getRandomId =HelperUtils.getRandomId
 
 export class ProductRepository{
     private readonly categoryRepository: CategoryRepository;

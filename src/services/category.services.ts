@@ -9,7 +9,7 @@ export class CategoryServices{
     }
 
     async addCategory(category: string){
-        const categoryExist = await  this.categoryRepository.getCategory(category) as ICategory
+        const categoryExist = await  this.categoryRepository.getCategory(category.toLowerCase()) as ICategory
         if(categoryExist){
             return 'Category Added.'
         }

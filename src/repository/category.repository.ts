@@ -1,16 +1,18 @@
 import path from 'path'
 import { ICategory } from '../types/category.type'
-import { readFileHelper, writeFileHelper } from '../helper/utils'
-import { getRandomId } from "../helper/utils";
+import { HelperUtils} from '../helper/utils'
 
 const categoryStorage = path.join(process.cwd(), 'data', 'category.json')
 
+const readFileHelper = HelperUtils.readFileHelper
+const writeFileHelper = HelperUtils.writeFileHelper
+const getRandomId =HelperUtils.getRandomId
 
 export class CategoryRepository{
     async addCategory(category: string):Promise<ICategory>{
         const categoryInfo = {
             category_id: getRandomId(),
-            title: category
+            title: category.toLowerCase()
         }
         try{
             const categories = await readFileHelper(categoryStorage)

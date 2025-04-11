@@ -3,9 +3,9 @@ import CartRoute from './routes/cart.route'
 import OrderRoute from './routes/order.route'
 import HelpRoute from './routes/help.route'
 import CategoryRoute from './routes/category.route'
-import { parseArgs } from './helper/utils'
+import { HelperUtils } from './helper/utils'
 
-const Command_Arguments = parseArgs(process.argv.slice(2))
+const Command_Arguments = HelperUtils.parseArgs(process.argv.slice(2))
 
 switch(Command_Arguments.cmd[0]){
     case 'help':
